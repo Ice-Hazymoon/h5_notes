@@ -12,7 +12,7 @@ wx.ready(function(){
 
 ## iOS 微信视频样式
 
-```javascript
+```html
 <video id="video" style="object-fit:fill;width: 100%;height: 100%;" x5-video-player-type="h5" preload="auto" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
     <source src="video.mp4" type="video/mp4">
 </video>
