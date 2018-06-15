@@ -2,11 +2,29 @@
 
 > 以下代码均经过测试
 
+## 微信无法保存 BlobURL 的图片, 请使用 DataURL
+
+```JavaScript
+canvas.toDataURL('image/jpeg');
+```
+
+## iOS html2canvas 问题
+
+```JavaScript
+html2canvas(document.body, {
+	async: false,
+	useCORS: true
+}).then((canvas)=> {
+    document.body.appendChild(canvas);
+});
+```
+
 ## iOS 微信音频自动播放
 
 ```javascript
-wx.ready(function(){
-    audio.play();
+const bgm = new Audio('bgm.mp3')
+wx.ready(e=>{
+	bgm.play();
 })
 ```
 
@@ -20,8 +38,12 @@ wx.ready(function(){
 
 ## iOS 微信视频自动播放
 
+```html
+<video id="video" src="video.mp4"></video>
+```
+
 ```javascript
-wx.ready(function(){
+wx.ready(e=>{
     video.play();
 })
 ```
