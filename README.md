@@ -1,18 +1,26 @@
 # 用于记录微信开发的一些坑
 
-> 以下代码均经过测试
+## 1px 的 base64图片
 
-## html2canvas 在 iOS 上生成图片时出现 `invalidStateError: The object is in an invalid state` 的问题
+或许会用到?
+
+```html
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
+```
+
+## html2canvas 在 iOS 上生成图片时报错
+
+html2canvas 在 iOS 上生成图片时出现 `invalidStateError: The object is in an invalid state` 的问题
 
 搜了半天发现貌似整个互联网就我出现了这种问题
 
-解决方案: 人工用 cnavas 把页面画出来.....(破插件坑了我两天都没弄出来
+解决方案: 人工用 cnavas 把页面画出来.....(插件坑了我两天
 
 ## canvas drawimage 绘制多张大图时 iOS 出不来的问题
 
-> 类似网易 2016 娱乐圈画传的 H5 [http://ent.163.com/special/entphotos2017/](http://ent.163.com/special/entphotos2017/)
-> 
-> 写了个类似的画中画小页面, 遇到了图片在iOS上出不来的bug, 网易怎么解决的我不知道, 我判断了所有图片均加载完成后将加载完的图片存入数组, 然后在 canvas 中使用可解决
+类似网易 2016 娱乐圈画传的 H5 [http://ent.163.com/special/entphotos2017/](http://ent.163.com/special/entphotos2017/)
+
+写了个类似的画中画小页面, 遇到了图片在iOS上出不来的bug, 网易怎么解决的我不知道, 我判断了所有图片均加载完成后将加载完的图片存入数组, 然后在 canvas 中使用可解决
 
 判断多张图片加载完成, 代码来自: [https://stackoverflow.com/a/8682318/9040159](https://stackoverflow.com/a/8682318/9040159)
 
