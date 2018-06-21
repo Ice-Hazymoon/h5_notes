@@ -2,21 +2,80 @@
 
 > 以下代码均经过测试
 
+## html2canvas 在 iOS 上生成图片时出现 `invalidStateError: The object is in an invalid state` 的问题
+
+搜了半天发现貌似整个互联网就我出现了这种问题
+
+解决方案: 人工用 cnavas 把页面画出来.....(破插件坑了我两天都没弄出来
+
+## canvas drawimage 绘制多张大图时 iOS 出不来的问题
+
+> 类似网易 2016 娱乐圈画传的 H5 [http://ent.163.com/special/entphotos2017/](http://ent.163.com/special/entphotos2017/)
+> 
+> 写了个类似的画中画小页面, 遇到了图片在iOS上出不来的bug, 网易怎么解决的我不知道, 我判断了所有图片均加载完成后将加载完的图片存入数组, 然后在 canvas 中使用可解决
+
+判断多张图片加载完成, 代码来自: [https://stackoverflow.com/a/8682318/9040159](https://stackoverflow.com/a/8682318/9040159)
+
+```JavaScript
+// loader will 'load' items by calling thingToDo for each item,
+// before calling allDone when all the things to do have been done.
+function loader(items, thingToDo, allDone) {
+    if (!items) {
+        // nothing to do.
+        return;
+    }
+
+    if ("undefined" === items.length) {
+        // convert single item to array.
+        items = [items];
+    }
+
+    var count = items.length;
+
+    // this callback counts down the things to do.
+    var thingToDoCompleted = function (items, i) {
+        count--;
+        if (0 == count) {
+            allDone(items);
+        }
+    };
+
+    for (var i = 0; i < items.length; i++) {
+        // 'do' each thing, and await callback.
+        thingToDo(items, i, thingToDoCompleted);
+    }
+}
+
+function loadImage(items, i, onComplete) {
+    var onLoad = function (e) {
+        e.target.removeEventListener("load", onLoad);
+
+        // this next line can be removed.
+        // only here to prove the image was loaded.
+        document.body.appendChild(e.target);
+
+        // notify that we're done.
+        onComplete(items, i);
+    }
+    var img = new Image();
+    img.addEventListener("load", onLoad, false);
+    img.src = items[i];
+}
+
+var items = ['http://bits.wikimedia.org/images/wikimedia-button.png',
+             'http://bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png',
+             'http://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png',
+             'http://upload.wikimedia.org/wikipedia/commons/3/38/Icons_example.png'];
+
+loader(items, loadImage, function () {
+    alert("done");
+});
+```
+
 ## 微信无法保存 BlobURL 的图片, 请使用 DataURL
 
 ```JavaScript
 canvas.toDataURL('image/jpeg');
-```
-
-## iOS html2canvas 问题
-
-```JavaScript
-html2canvas(document.body, {
-	async: false,
-	useCORS: true
-}).then((canvas)=> {
-    document.body.appendChild(canvas);
-});
 ```
 
 ## iOS 微信音频自动播放
