@@ -1,5 +1,11 @@
 # 用于记录微信开发的一些坑
 
+## `overflow: auto|scroll` 在移动设备上卡顿的解决方法
+
+```css
+-webkit-overflow-scrolling: touch;
+```
+
 ## 让Swiper移动端超出一屏的部分滚动显示而不是触发滑到下一页
 
 > 来自[https://www.wikimoe.com/?post=68](https://www.wikimoe.com/?post=68)
