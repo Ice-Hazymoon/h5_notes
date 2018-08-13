@@ -12,28 +12,28 @@
 
 ```javascript
 var swiper = new Swiper('.swiper-container', {
-        direction: 'vertical',
-    });
-    var startScroll, touchStart, touchCurrent;
-    swiper.slides.on('touchstart', function (e) {
-        startScroll = this.scrollTop;
-        touchStart = e.targetTouches[0].pageY;
-    }, true);
-    swiper.slides.on('touchmove', function (e) {
-        touchCurrent = e.targetTouches[0].pageY;
-        var touchesDiff = touchCurrent - touchStart;
-        var slide = this;
-        var onlyScrolling =
-                ( slide.scrollHeight > slide.offsetHeight ) && 
-                (
-                    ( touchesDiff < 0 && startScroll === 0 ) || 
-                    ( touchesDiff > 0 && startScroll === ( slide.scrollHeight - slide.offsetHeight ) ) || 
-                    ( startScroll > 0 && startScroll < ( slide.scrollHeight - slide.offsetHeight ) ) 
-                );
-        if (onlyScrolling) {
-            e.stopPropagation();
-        }
-    }, true);
+	direction: 'vertical',
+});
+var startScroll, touchStart, touchCurrent;
+swiper.slides.on('touchstart', function (e) {
+	startScroll = this.scrollTop;
+	touchStart = e.targetTouches[0].pageY;
+}, true);
+swiper.slides.on('touchmove', function (e) {
+	touchCurrent = e.targetTouches[0].pageY;
+	var touchesDiff = touchCurrent - touchStart;
+	var slide = this;
+	var onlyScrolling =
+			( slide.scrollHeight > slide.offsetHeight ) && 
+			(
+				( touchesDiff < 0 && startScroll === 0 ) || 
+				( touchesDiff > 0 && startScroll === ( slide.scrollHeight - slide.offsetHeight ) ) || 
+				( startScroll > 0 && startScroll < ( slide.scrollHeight - slide.offsetHeight ) ) 
+			);
+	if (onlyScrolling) {
+		e.stopPropagation();
+	}
+}, true);
 ```
 
 ## 部分视频在 iOS 设备上播放没有声音
@@ -64,7 +64,7 @@ html2canvas 在 iOS 上生成图片时出现 `invalidStateError: The object is i
 
 类似网易 2016 娱乐圈画传的 H5 [http://ent.163.com/special/entphotos2017/](http://ent.163.com/special/entphotos2017/)
 
-写了个类似的画中画小页面, 遇到了图片在iOS上出不来的bug, 网易怎么解决的我不知道, 我判断了所有图片均加载完成后将加载完的图片存入数组, 然后在 canvas 中使用可解决
+写了个类似的画中画小页面, 遇到了图片在iOS上出不来的bug, 我判断了所有图片均加载完成后将加载完的图片存入数组, 然后在 canvas 中使用可解决
 
 判断多张图片加载完成, 代码来自: [https://stackoverflow.com/a/8682318/9040159](https://stackoverflow.com/a/8682318/9040159)
 
@@ -140,6 +140,12 @@ wx.ready(e=>{
 ```
 
 ## iOS 微信视频样式
+
+> 参考 [https://x5.tencent.com/tbs/guide/video.html](https://x5.tencent.com/tbs/guide/video.html)
+
+- x5-video-player-type: 启用Ｈ5同层播放器
+- x5-video-player-fullscreen: 全屏方式
+- x5-video-orientation 控制横竖屏
 
 ```html
 <video id="video" style="object-fit:fill;width: 100%;height: 100%;" x5-video-player-type="h5" preload="auto" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
