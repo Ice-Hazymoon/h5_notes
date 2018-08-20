@@ -1,5 +1,9 @@
 # 用于记录H5开发的一些坑
 
+## html2canvas 生成的背景图片模糊问题
+
+> 使用 `img` 标签即可解决
+
 ## `overflow: auto|scroll` 在移动设备上卡顿的解决方法
 
 ```css
